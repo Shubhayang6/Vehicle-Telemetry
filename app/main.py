@@ -1,16 +1,16 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
 
 app = FastAPI()
 
 class Telemetry(BaseModel):
-    vehicle_id:str
-    timestamp:int
-    speed:float
-    engine_temp:float
-    rpm:int
+    vehicle_id:StrictStr
+    timestamp:StrictInt
+    speed:StrictFloat
+    engine_temp:StrictFloat
+    rpm:StrictInt
     
-@app.post("/Telemetry")
+@app.post("/telemetry")
 def ingest_telemetry(data:Telemetry):
     return {
         "message": "telemetry received",
